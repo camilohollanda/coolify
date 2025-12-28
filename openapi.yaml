@@ -93,12 +93,12 @@ paths:
                 git_commit_sha:
                   type: string
                   description: 'The git commit SHA.'
-                docker_registry_image_name:
+                docker_image_name:
                   type: string
-                  description: 'The docker registry image name.'
-                docker_registry_image_tag:
+                  description: 'The docker image name.'
+                docker_image_tag:
                   type: string
-                  description: 'The docker registry image tag.'
+                  description: 'The docker image tag.'
                 is_static:
                   type: boolean
                   description: 'The flag to indicate if the application is static.'
@@ -363,12 +363,12 @@ paths:
                 git_commit_sha:
                   type: string
                   description: 'The git commit SHA.'
-                docker_registry_image_name:
+                docker_image_name:
                   type: string
-                  description: 'The docker registry image name.'
-                docker_registry_image_tag:
+                  description: 'The docker image name.'
+                docker_image_tag:
                   type: string
-                  description: 'The docker registry image tag.'
+                  description: 'The docker image tag.'
                 is_static:
                   type: boolean
                   description: 'The flag to indicate if the application is static.'
@@ -633,12 +633,12 @@ paths:
                 git_commit_sha:
                   type: string
                   description: 'The git commit SHA.'
-                docker_registry_image_name:
+                docker_image_name:
                   type: string
-                  description: 'The docker registry image name.'
-                docker_registry_image_tag:
+                  description: 'The docker image name.'
+                docker_image_tag:
                   type: string
-                  description: 'The docker registry image tag.'
+                  description: 'The docker image tag.'
                 is_static:
                   type: boolean
                   description: 'The flag to indicate if the application is static.'
@@ -890,12 +890,12 @@ paths:
                 domains:
                   type: string
                   description: 'The application domains.'
-                docker_registry_image_name:
+                docker_image_name:
                   type: string
-                  description: 'The docker registry image name.'
-                docker_registry_image_tag:
+                  description: 'The docker image name.'
+                docker_image_tag:
                   type: string
-                  description: 'The docker registry image tag.'
+                  description: 'The docker image tag.'
                 ports_mappings:
                   type: string
                   description: 'The ports mappings.'
@@ -1071,7 +1071,7 @@ paths:
                 - server_uuid
                 - environment_name
                 - environment_uuid
-                - docker_registry_image_name
+                - docker_image_name
                 - ports_exposes
               properties:
                 project_uuid:
@@ -1086,12 +1086,12 @@ paths:
                 environment_uuid:
                   type: string
                   description: 'The environment UUID. You need to provide at least one of environment_name or environment_uuid.'
-                docker_registry_image_name:
+                docker_image_name:
                   type: string
-                  description: 'The docker registry image name.'
-                docker_registry_image_tag:
+                  description: 'The docker image name.'
+                docker_image_tag:
                   type: string
-                  description: 'The docker registry image tag.'
+                  description: 'The docker image tag.'
                 ports_exposes:
                   type: string
                   description: 'The ports to expose.'
@@ -1504,12 +1504,12 @@ paths:
                 git_commit_sha:
                   type: string
                   description: 'The git commit SHA.'
-                docker_registry_image_name:
+                docker_image_name:
                   type: string
-                  description: 'The docker registry image name.'
-                docker_registry_image_tag:
+                  description: 'The docker image name.'
+                docker_image_tag:
                   type: string
-                  description: 'The docker registry image tag.'
+                  description: 'The docker image tag.'
                 is_static:
                   type: boolean
                   description: 'The flag to indicate if the application is static.'
@@ -6332,11 +6332,11 @@ components:
           type: string
           nullable: true
           description: 'Git full URL.'
-        docker_registry_image_name:
+        docker_image_name:
           type: string
           nullable: true
           description: 'Docker registry image name.'
-        docker_registry_image_tag:
+        docker_image_tag:
           type: string
           nullable: true
           description: 'Docker registry image tag.'

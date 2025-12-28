@@ -30,7 +30,7 @@ class CleanupDocker
         // Get all application image repositories to exclude from prune
         $applications = $server->applications();
         $applicationImageRepos = collect($applications)->map(function ($app) {
-            return $app->docker_registry_image_name ?? $app->uuid;
+            return $app->docker_image_name ?? $app->uuid;
         })->unique()->values();
 
         // Clean up old application images while preserving N most recent for rollback
@@ -144,7 +144,7 @@ class CleanupDocker
 
         foreach ($applications as $application) {
             $imagesToKeep = $disableRetention ? 0 : ($application->settings->docker_images_to_keep ?? 2);
-            $imageRepository = $application->docker_registry_image_name ?? $application->uuid;
+            $imageRepository = $application->docker_image_name ?? $application->uuid;
 
             // Get the currently running image tag
             $currentTagCommand = "docker inspect --format='{{.Config.Image}}' {$application->uuid} 2>/dev/null | grep -oP '(?<=:)[^:]+$' || true";

@@ -117,8 +117,8 @@ class ConfigurationGenerator
     protected function getDockerRegistryImage(): array
     {
         return [
-            'image' => $this->resource->docker_registry_image_name,
-            'tag' => $this->resource->docker_registry_image_tag,
+            'image' => $this->resource->docker_image_name,
+            'tag' => $this->resource->docker_image_tag,
         ];
     }
 

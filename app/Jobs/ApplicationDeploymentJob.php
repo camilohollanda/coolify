@@ -554,11 +554,11 @@ class ApplicationDeploymentJob implements ShouldBeEncrypted, ShouldQueue
 
     private function deploy_dockerimage_buildpack()
     {
-        $this->dockerImage = $this->application->docker_registry_image_name;
-        if (str($this->application->docker_registry_image_tag)->isEmpty()) {
+        $this->dockerImage = $this->application->docker_image_name;
+        if (str($this->application->docker_image_tag)->isEmpty()) {
             $this->dockerImageTag = 'latest';
         } else {
-            $this->dockerImageTag = $this->application->docker_registry_image_tag;
+            $this->dockerImageTag = $this->application->docker_image_tag;
         }
 
         // Check if this is an image hash deployment
@@ -997,7 +997,7 @@ class ApplicationDeploymentJob implements ShouldBeEncrypted, ShouldQueue
     private function push_to_docker_registry()
     {
         $forceFail = true;
-        if (str($this->application->docker_registry_image_name)->isEmpty()) {
+        if (str($this->application->docker_image_name)->isEmpty()) {
             return;
         }
         if ($this->restart_only) {
@@ -1028,17 +1028,17 @@ class ApplicationDeploymentJob implements ShouldBeEncrypted, ShouldQueue
                     'hidden' => true,
                 ],
             );
-            if ($this->application->docker_registry_image_tag) {
-                // Tag image with docker_registry_image_tag
-                $this->application_deployment_queue->addLogEntry("Tagging and pushing image with {$this->application->docker_registry_image_tag} tag.");
+            if ($this->application->docker_image_tag) {
+                // Tag image with docker_image_tag
+                $this->application_deployment_queue->addLogEntry("Tagging and pushing image with {$this->application->docker_image_tag} tag.");
                 $this->execute_remote_command(
                     [
-                        executeInDocker($this->deployment_uuid, "docker tag {$this->production_image_name} {$this->application->docker_registry_image_name}:{$this->application->docker_registry_image_tag}"),
+                        executeInDocker($this->deployment_uuid, "docker tag {$this->production_image_name} {$this->application->docker_image_name}:{$this->application->docker_image_tag}"),
                         'ignore_errors' => true,
                         'hidden' => true,
                     ],
                     [
-                        executeInDocker($this->deployment_uuid, "docker push {$this->application->docker_registry_image_name}:{$this->application->docker_registry_image_tag}"),
+                        executeInDocker($this->deployment_uuid, "docker push {$this->application->docker_image_name}:{$this->application->docker_image_tag}"),
                         'ignore_errors' => true,
                         'hidden' => true,
                     ],
@@ -1055,9 +1055,9 @@ class ApplicationDeploymentJob implements ShouldBeEncrypted, ShouldQueue
     private function generate_image_names()
     {
         if ($this->application->dockerfile) {
-            if ($this->application->docker_registry_image_name) {
-                $this->build_image_name = "{$this->application->docker_registry_image_name}:build";
-                $this->production_image_name = "{$this->application->docker_registry_image_name}:latest";
+            if ($this->application->docker_image_name) {
+                $this->build_image_name = "{$this->application->docker_image_name}:build";
+                $this->production_image_name = "{$this->application->docker_image_name}:latest";
             } else {
                 $this->build_image_name = "{$this->application->uuid}:build";
                 $this->production_image_name = "{$this->application->uuid}:latest";
@@ -1071,21 +1071,21 @@ class ApplicationDeploymentJob implements ShouldBeEncrypted, ShouldQueue
                 $this->production_image_name = "{$this->dockerImage}:{$this->dockerImageTag}";
             }
         } elseif ($this->pull_request_id !== 0) {
-            if ($this->application->docker_registry_image_name) {
-                $this->build_image_name = "{$this->application->docker_registry_image_name}:pr-{$this->pull_request_id}-build";
-                $this->production_image_name = "{$this->application->docker_registry_image_name}:pr-{$this->pull_request_id}";
+            if ($this->application->docker_image_name) {
+                $this->build_image_name = "{$this->application->docker_image_name}:pr-{$this->pull_request_id}-build";
+                $this->production_image_name = "{$this->application->docker_image_name}:pr-{$this->pull_request_id}";
             } else {
                 $this->build_image_name = "{$this->application->uuid}:pr-{$this->pull_request_id}-build";
                 $this->production_image_name = "{$this->application->uuid}:pr-{$this->pull_request_id}";
             }
         } else {
             $this->dockerImageTag = str($this->commit)->substr(0, 128);
-            // if ($this->application->docker_registry_image_tag) {
-            //     $this->dockerImageTag = $this->application->docker_registry_image_tag;
+            // if ($this->application->docker_image_tag) {
+            //     $this->dockerImageTag = $this->application->docker_image_tag;
             // }
-            if ($this->application->docker_registry_image_name) {
-                $this->build_image_name = "{$this->application->docker_registry_image_name}:{$this->dockerImageTag}-build";
-                $this->production_image_name = "{$this->application->docker_registry_image_name}:{$this->dockerImageTag}";
+            if ($this->application->docker_image_name) {
+                $this->build_image_name = "{$this->application->docker_image_name}:{$this->dockerImageTag}-build";
+                $this->production_image_name = "{$this->application->docker_image_name}:{$this->dockerImageTag}";
             } else {
                 $this->build_image_name = "{$this->application->uuid}:{$this->dockerImageTag}-build";
                 $this->production_image_name = "{$this->application->uuid}:{$this->dockerImageTag}";
@@ -1153,7 +1153,7 @@ class ApplicationDeploymentJob implements ShouldBeEncrypted, ShouldQueue
             'hidden' => true,
             'save' => 'local_image_found',
         ]);
-        if (str($this->saved_outputs->get('local_image_found'))->isEmpty() && $this->application->docker_registry_image_name) {
+        if (str($this->saved_outputs->get('local_image_found'))->isEmpty() && $this->application->docker_image_name) {
             $this->execute_remote_command([
                 "docker pull {$this->production_image_name} 2>/dev/null",
                 'ignore_errors' => true,
@@ -2796,11 +2796,11 @@ class ApplicationDeploymentJob implements ShouldBeEncrypted, ShouldQueue
             return;
         }
 
-        if (str($this->application->docker_registry_image_name)->isEmpty()) {
+        if (str($this->application->docker_image_name)->isEmpty()) {
             return;
         }
 
-        $imageName = str($this->application->docker_registry_image_name)->before('@sha256')->value();
+        $imageName = str($this->application->docker_image_name)->before('@sha256')->value();
         $parser = new DockerImageParser;
         $parser->parse($imageName.':latest');
         $registryUrl = $registry?->registry_url ?: $parser->getRegistryUrl();

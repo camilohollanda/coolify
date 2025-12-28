@@ -285,8 +285,8 @@ class General extends Component
         'portsExposes' => 'Ports exposes',
         'portsMappings' => 'Ports mappings',
         'dockerfile' => 'Dockerfile',
-        'dockerRegistryImageName' => 'Docker registry image name',
-        'dockerRegistryImageTag' => 'Docker registry image tag',
+        'dockerRegistryImageName' => 'Docker image name',
+        'dockerRegistryImageTag' => 'Docker image tag',
         'dockerRegistryId' => 'Docker registry credentials',
         'dockerfileLocation' => 'Dockerfile location',
         'dockerComposeLocation' => 'Docker compose location',
@@ -405,8 +405,8 @@ class General extends Component
             $this->application->dockerfile = $this->dockerfile;
             $this->application->dockerfile_location = $this->dockerfileLocation;
             $this->application->dockerfile_target_build = $this->dockerfileTargetBuild;
-            $this->application->docker_registry_image_name = $this->dockerRegistryImageName;
-            $this->application->docker_registry_image_tag = $this->dockerRegistryImageTag;
+            $this->application->docker_image_name = $this->dockerRegistryImageName;
+            $this->application->docker_image_tag = $this->dockerRegistryImageTag;
             $this->application->docker_registry_id = $this->dockerRegistryId;
             $this->application->docker_compose_location = $this->dockerComposeLocation;
             $this->application->docker_compose = $this->dockerCompose;
@@ -458,8 +458,8 @@ class General extends Component
             $this->dockerfile = $this->application->dockerfile;
             $this->dockerfileLocation = $this->application->dockerfile_location;
             $this->dockerfileTargetBuild = $this->application->dockerfile_target_build;
-            $this->dockerRegistryImageName = $this->application->docker_registry_image_name;
-            $this->dockerRegistryImageTag = $this->application->docker_registry_image_tag;
+            $this->dockerRegistryImageName = $this->application->docker_image_name;
+            $this->dockerRegistryImageTag = $this->application->docker_image_tag;
             $this->dockerRegistryId = $this->application->docker_registry_id;
             $this->dockerComposeLocation = $this->application->docker_compose_location;
             $this->dockerCompose = $this->application->docker_compose;

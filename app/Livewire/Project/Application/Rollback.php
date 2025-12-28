@@ -79,7 +79,7 @@ class Rollback extends Component
         $this->authorize('view', $this->application);
 
         try {
-            $image = $this->application->docker_registry_image_name ?? $this->application->uuid;
+            $image = $this->application->docker_image_name ?? $this->application->uuid;
             if ($this->application->destination->server->isFunctional()) {
                 $output = instant_remote_process([
                     "docker inspect --format='{{.Config.Image}}' {$this->application->uuid}",

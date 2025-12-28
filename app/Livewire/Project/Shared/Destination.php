@@ -70,7 +70,7 @@ class Destination extends Component
     public function redeploy(int $network_id, int $server_id)
     {
         try {
-            if ($this->resource->additional_servers->count() > 0 && str($this->resource->docker_registry_image_name)->isEmpty()) {
+            if ($this->resource->additional_servers->count() > 0 && str($this->resource->docker_image_name)->isEmpty()) {
                 $this->dispatch('error', 'Failed to deploy.', 'Before deploying to multiple servers, you must first set a Docker image in the General tab.<br>More information here: <a target="_blank" class="underline" href="https://coolify.io/docs/knowledge-base/server/multiple-servers">documentation</a>');
 
                 return;

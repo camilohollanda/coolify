@@ -130,13 +130,13 @@
                                         "type": "string",
                                         "description": "The git commit SHA."
                                     },
-                                    "docker_registry_image_name": {
+                                    "docker_image_name": {
                                         "type": "string",
-                                        "description": "The docker registry image name."
+                                        "description": "The docker image name."
                                     },
-                                    "docker_registry_image_tag": {
+                                    "docker_image_tag": {
                                         "type": "string",
-                                        "description": "The docker registry image tag."
+                                        "description": "The docker image tag."
                                     },
                                     "is_static": {
                                         "type": "boolean",
@@ -545,13 +545,13 @@
                                         "type": "string",
                                         "description": "The git commit SHA."
                                     },
-                                    "docker_registry_image_name": {
+                                    "docker_image_name": {
                                         "type": "string",
-                                        "description": "The docker registry image name."
+                                        "description": "The docker image name."
                                     },
-                                    "docker_registry_image_tag": {
+                                    "docker_image_tag": {
                                         "type": "string",
-                                        "description": "The docker registry image tag."
+                                        "description": "The docker image tag."
                                     },
                                     "is_static": {
                                         "type": "boolean",
@@ -960,13 +960,13 @@
                                         "type": "string",
                                         "description": "The git commit SHA."
                                     },
-                                    "docker_registry_image_name": {
+                                    "docker_image_name": {
                                         "type": "string",
-                                        "description": "The docker registry image name."
+                                        "description": "The docker image name."
                                     },
-                                    "docker_registry_image_tag": {
+                                    "docker_image_tag": {
                                         "type": "string",
-                                        "description": "The docker registry image tag."
+                                        "description": "The docker image tag."
                                     },
                                     "is_static": {
                                         "type": "boolean",
@@ -1359,13 +1359,13 @@
                                         "type": "string",
                                         "description": "The application domains."
                                     },
-                                    "docker_registry_image_name": {
+                                    "docker_image_name": {
                                         "type": "string",
-                                        "description": "The docker registry image name."
+                                        "description": "The docker image name."
                                     },
-                                    "docker_registry_image_tag": {
+                                    "docker_image_tag": {
                                         "type": "string",
-                                        "description": "The docker registry image tag."
+                                        "description": "The docker image tag."
                                     },
                                     "ports_mappings": {
                                         "type": "string",
@@ -1650,7 +1650,7 @@
                                     "server_uuid",
                                     "environment_name",
                                     "environment_uuid",
-                                    "docker_registry_image_name",
+                                    "docker_image_name",
                                     "ports_exposes"
                                 ],
                                 "properties": {
@@ -1670,13 +1670,13 @@
                                         "type": "string",
                                         "description": "The environment UUID. You need to provide at least one of environment_name or environment_uuid."
                                     },
-                                    "docker_registry_image_name": {
+                                    "docker_image_name": {
                                         "type": "string",
-                                        "description": "The docker registry image name."
+                                        "description": "The docker image name."
                                     },
-                                    "docker_registry_image_tag": {
+                                    "docker_image_tag": {
                                         "type": "string",
-                                        "description": "The docker registry image tag."
+                                        "description": "The docker image tag."
                                     },
                                     "ports_exposes": {
                                         "type": "string",
@@ -2342,13 +2342,13 @@
                                         "type": "string",
                                         "description": "The git commit SHA."
                                     },
-                                    "docker_registry_image_name": {
+                                    "docker_image_name": {
                                         "type": "string",
-                                        "description": "The docker registry image name."
+                                        "description": "The docker image name."
                                     },
-                                    "docker_registry_image_tag": {
+                                    "docker_image_tag": {
                                         "type": "string",
-                                        "description": "The docker registry image tag."
+                                        "description": "The docker image tag."
                                     },
                                     "is_static": {
                                         "type": "boolean",
@@ -10064,12 +10064,12 @@
                         "nullable": true,
                         "description": "Git full URL."
                     },
-                    "docker_registry_image_name": {
+                    "docker_image_name": {
                         "type": "string",
                         "nullable": true,
                         "description": "Docker registry image name."
                     },
-                    "docker_registry_image_tag": {
+                    "docker_image_tag": {
                         "type": "string",
                         "nullable": true,
                         "description": "Docker registry image tag."

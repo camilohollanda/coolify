@@ -137,8 +137,8 @@ class ApplicationsController extends Controller
                             'description' => ['type' => 'string', 'description' => 'The application description.'],
                             'domains' => ['type' => 'string', 'description' => 'The application domains.'],
                             'git_commit_sha' => ['type' => 'string', 'description' => 'The git commit SHA.'],
-                            'docker_registry_image_name' => ['type' => 'string', 'description' => 'The docker registry image name.'],
-                            'docker_registry_image_tag' => ['type' => 'string', 'description' => 'The docker registry image tag.'],
+                            'docker_image_name' => ['type' => 'string', 'description' => 'The docker image name.'],
+                            'docker_image_tag' => ['type' => 'string', 'description' => 'The docker image tag.'],
                             'is_static' => ['type' => 'boolean', 'description' => 'The flag to indicate if the application is static.'],
                             'static_image' => ['type' => 'string', 'enum' => ['nginx:alpine'], 'description' => 'The static image.'],
                             'install_command' => ['type' => 'string', 'description' => 'The install command.'],
@@ -289,8 +289,8 @@ class ApplicationsController extends Controller
                             'description' => ['type' => 'string', 'description' => 'The application description.'],
                             'domains' => ['type' => 'string', 'description' => 'The application domains.'],
                             'git_commit_sha' => ['type' => 'string', 'description' => 'The git commit SHA.'],
-                            'docker_registry_image_name' => ['type' => 'string', 'description' => 'The docker registry image name.'],
-                            'docker_registry_image_tag' => ['type' => 'string', 'description' => 'The docker registry image tag.'],
+                            'docker_image_name' => ['type' => 'string', 'description' => 'The docker image name.'],
+                            'docker_image_tag' => ['type' => 'string', 'description' => 'The docker image tag.'],
                             'is_static' => ['type' => 'boolean', 'description' => 'The flag to indicate if the application is static.'],
                             'static_image' => ['type' => 'string', 'enum' => ['nginx:alpine'], 'description' => 'The static image.'],
                             'install_command' => ['type' => 'string', 'description' => 'The install command.'],
@@ -440,8 +440,8 @@ class ApplicationsController extends Controller
                             'description' => ['type' => 'string', 'description' => 'The application description.'],
                             'domains' => ['type' => 'string', 'description' => 'The application domains.'],
                             'git_commit_sha' => ['type' => 'string', 'description' => 'The git commit SHA.'],
-                            'docker_registry_image_name' => ['type' => 'string', 'description' => 'The docker registry image name.'],
-                            'docker_registry_image_tag' => ['type' => 'string', 'description' => 'The docker registry image tag.'],
+                            'docker_image_name' => ['type' => 'string', 'description' => 'The docker image name.'],
+                            'docker_image_tag' => ['type' => 'string', 'description' => 'The docker image tag.'],
                             'is_static' => ['type' => 'boolean', 'description' => 'The flag to indicate if the application is static.'],
                             'static_image' => ['type' => 'string', 'enum' => ['nginx:alpine'], 'description' => 'The static image.'],
                             'install_command' => ['type' => 'string', 'description' => 'The install command.'],
@@ -588,8 +588,8 @@ class ApplicationsController extends Controller
                             'name' => ['type' => 'string', 'description' => 'The application name.'],
                             'description' => ['type' => 'string', 'description' => 'The application description.'],
                             'domains' => ['type' => 'string', 'description' => 'The application domains.'],
-                            'docker_registry_image_name' => ['type' => 'string', 'description' => 'The docker registry image name.'],
-                            'docker_registry_image_tag' => ['type' => 'string', 'description' => 'The docker registry image tag.'],
+                            'docker_image_name' => ['type' => 'string', 'description' => 'The docker image name.'],
+                            'docker_image_tag' => ['type' => 'string', 'description' => 'The docker image tag.'],
                             'ports_mappings' => ['type' => 'string', 'description' => 'The ports mappings.'],
                             'base_directory' => ['type' => 'string', 'description' => 'The base directory for all commands.'],
                             'health_check_enabled' => ['type' => 'boolean', 'description' => 'Health check enabled.'],
@@ -710,14 +710,14 @@ class ApplicationsController extends Controller
                     mediaType: 'application/json',
                     schema: new OA\Schema(
                         type: 'object',
-                        required: ['project_uuid', 'server_uuid', 'environment_name', 'environment_uuid', 'docker_registry_image_name', 'ports_exposes'],
+                        required: ['project_uuid', 'server_uuid', 'environment_name', 'environment_uuid', 'docker_image_name', 'ports_exposes'],
                         properties: [
                             'project_uuid' => ['type' => 'string', 'description' => 'The project UUID.'],
                             'server_uuid' => ['type' => 'string', 'description' => 'The server UUID.'],
                             'environment_name' => ['type' => 'string', 'description' => 'The environment name. You need to provide at least one of environment_name or environment_uuid.'],
                             'environment_uuid' => ['type' => 'string', 'description' => 'The environment UUID. You need to provide at least one of environment_name or environment_uuid.'],
-                            'docker_registry_image_name' => ['type' => 'string', 'description' => 'The docker registry image name.'],
-                            'docker_registry_image_tag' => ['type' => 'string', 'description' => 'The docker registry image tag.'],
+                            'docker_image_name' => ['type' => 'string', 'description' => 'The docker image name.'],
+                            'docker_image_tag' => ['type' => 'string', 'description' => 'The docker image tag.'],
                             'ports_exposes' => ['type' => 'string', 'description' => 'The ports to expose.'],
                             'destination_uuid' => ['type' => 'string', 'description' => 'The destination UUID.'],
                             'name' => ['type' => 'string', 'description' => 'The application name.'],
@@ -932,7 +932,7 @@ class ApplicationsController extends Controller
         if ($return instanceof \Illuminate\Http\JsonResponse) {
             return $return;
         }
-        $allowedFields = ['project_uuid', 'environment_name', 'environment_uuid', 'server_uuid', 'destination_uuid', 'type', 'name', 'description', 'is_static', 'domains', 'git_repository', 'git_branch', 'git_commit_sha', 'private_key_uuid', 'docker_registry_image_name', 'docker_registry_image_tag', 'docker_registry_id', 'build_pack', 'install_command', 'build_command', 'start_command', 'ports_exposes', 'ports_mappings', 'base_directory', 'publish_directory', 'health_check_enabled', 'health_check_path', 'health_check_port', 'health_check_host', 'health_check_method', 'health_check_return_code', 'health_check_scheme', 'health_check_response_text', 'health_check_interval', 'health_check_timeout', 'health_check_retries', 'health_check_start_period', 'limits_memory', 'limits_memory_swap', 'limits_memory_swappiness', 'limits_memory_reservation', 'limits_cpus', 'limits_cpuset', 'limits_cpu_shares', 'custom_labels', 'custom_docker_run_options', 'post_deployment_command', 'post_deployment_command_container', 'pre_deployment_command', 'pre_deployment_command_container',  'manual_webhook_secret_github', 'manual_webhook_secret_gitlab', 'manual_webhook_secret_bitbucket', 'manual_webhook_secret_gitea', 'redirect', 'github_app_uuid', 'instant_deploy', 'dockerfile', 'docker_compose_location', 'docker_compose_raw', 'docker_compose_custom_start_command', 'docker_compose_custom_build_command', 'docker_compose_domains', 'watch_paths', 'use_build_server', 'static_image', 'custom_nginx_configuration', 'is_http_basic_auth_enabled', 'http_basic_auth_username', 'http_basic_auth_password', 'connect_to_docker_network', 'force_domain_override', 'autogenerate_domain'];
+        $allowedFields = ['project_uuid', 'environment_name', 'environment_uuid', 'server_uuid', 'destination_uuid', 'type', 'name', 'description', 'is_static', 'domains', 'git_repository', 'git_branch', 'git_commit_sha', 'private_key_uuid', 'docker_image_name', 'docker_image_tag', 'docker_registry_id', 'build_pack', 'install_command', 'build_command', 'start_command', 'ports_exposes', 'ports_mappings', 'base_directory', 'publish_directory', 'health_check_enabled', 'health_check_path', 'health_check_port', 'health_check_host', 'health_check_method', 'health_check_return_code', 'health_check_scheme', 'health_check_response_text', 'health_check_interval', 'health_check_timeout', 'health_check_retries', 'health_check_start_period', 'limits_memory', 'limits_memory_swap', 'limits_memory_swappiness', 'limits_memory_reservation', 'limits_cpus', 'limits_cpuset', 'limits_cpu_shares', 'custom_labels', 'custom_docker_run_options', 'post_deployment_command', 'post_deployment_command_container', 'pre_deployment_command', 'pre_deployment_command_container',  'manual_webhook_secret_github', 'manual_webhook_secret_gitlab', 'manual_webhook_secret_bitbucket', 'manual_webhook_secret_gitea', 'redirect', 'github_app_uuid', 'instant_deploy', 'dockerfile', 'docker_compose_location', 'docker_compose_raw', 'docker_compose_custom_start_command', 'docker_compose_custom_build_command', 'docker_compose_domains', 'watch_paths', 'use_build_server', 'static_image', 'custom_nginx_configuration', 'is_http_basic_auth_enabled', 'http_basic_auth_username', 'http_basic_auth_password', 'connect_to_docker_network', 'force_domain_override', 'autogenerate_domain'];
 
         $validator = customApiValidator($request->all(), [
             'name' => 'string|max:255',
@@ -1521,8 +1521,8 @@ class ApplicationsController extends Controller
             ]))->setStatusCode(201);
         } elseif ($type === 'dockerimage') {
             $validationRules = [
-                'docker_registry_image_name' => 'string|required',
-                'docker_registry_image_tag' => 'string',
+                'docker_image_name' => 'string|required',
+                'docker_image_tag' => 'string',
                 'ports_exposes' => 'string|regex:/^(\d+)(,\d+)*$/|required',
             ];
             $validationRules = array_merge(sharedDataApplications(), $validationRules);
@@ -1542,8 +1542,8 @@ class ApplicationsController extends Controller
                 return $return;
             }
             // Process docker image name and tag using DockerImageParser
-            $dockerImageName = $request->docker_registry_image_name;
-            $dockerImageTag = $request->docker_registry_image_tag;
+            $dockerImageName = $request->docker_image_name;
+            $dockerImageTag = $request->docker_image_tag;
 
             // Build the full Docker image string for parsing
             if ($dockerImageTag) {
@@ -1565,8 +1565,8 @@ class ApplicationsController extends Controller
             }
 
             // Set processed values back to request
-            $request->offsetSet('docker_registry_image_name', $normalizedImageName);
-            $request->offsetSet('docker_registry_image_tag', $parser->getTag());
+            $request->offsetSet('docker_image_name', $normalizedImageName);
+            $request->offsetSet('docker_image_tag', $parser->getTag());
 
             $application = new Application;
             removeUnnecessaryFieldsFromRequest($request);
@@ -2002,8 +2002,8 @@ class ApplicationsController extends Controller
                             'description' => ['type' => 'string', 'description' => 'The application description.'],
                             'domains' => ['type' => 'string', 'description' => 'The application domains.'],
                             'git_commit_sha' => ['type' => 'string', 'description' => 'The git commit SHA.'],
-                            'docker_registry_image_name' => ['type' => 'string', 'description' => 'The docker registry image name.'],
-                            'docker_registry_image_tag' => ['type' => 'string', 'description' => 'The docker registry image tag.'],
+                            'docker_image_name' => ['type' => 'string', 'description' => 'The docker image name.'],
+                            'docker_image_tag' => ['type' => 'string', 'description' => 'The docker image tag.'],
                             'is_static' => ['type' => 'boolean', 'description' => 'The flag to indicate if the application is static.'],
                             'install_command' => ['type' => 'string', 'description' => 'The install command.'],
                             'build_command' => ['type' => 'string', 'description' => 'The build command.'],
@@ -2137,7 +2137,7 @@ class ApplicationsController extends Controller
         $this->authorize('update', $application);
 
         $server = $application->destination->server;
-        $allowedFields = ['name', 'description', 'is_static', 'domains', 'git_repository', 'git_branch', 'git_commit_sha', 'docker_registry_image_name', 'docker_registry_image_tag', 'docker_registry_id', 'build_pack', 'static_image', 'install_command', 'build_command', 'start_command', 'ports_exposes', 'ports_mappings', 'base_directory', 'publish_directory', 'health_check_enabled', 'health_check_path', 'health_check_port', 'health_check_host', 'health_check_method', 'health_check_return_code', 'health_check_scheme', 'health_check_response_text', 'health_check_interval', 'health_check_timeout', 'health_check_retries', 'health_check_start_period', 'limits_memory', 'limits_memory_swap', 'limits_memory_swappiness', 'limits_memory_reservation', 'limits_cpus', 'limits_cpuset', 'limits_cpu_shares', 'custom_labels', 'custom_docker_run_options', 'post_deployment_command', 'post_deployment_command_container', 'pre_deployment_command', 'pre_deployment_command_container', 'watch_paths', 'manual_webhook_secret_github', 'manual_webhook_secret_gitlab', 'manual_webhook_secret_bitbucket', 'manual_webhook_secret_gitea', 'docker_compose_location', 'docker_compose_raw', 'docker_compose_custom_start_command', 'docker_compose_custom_build_command', 'docker_compose_domains', 'redirect', 'instant_deploy', 'use_build_server', 'custom_nginx_configuration', 'is_http_basic_auth_enabled', 'http_basic_auth_username', 'http_basic_auth_password', 'connect_to_docker_network', 'force_domain_override'];
+        $allowedFields = ['name', 'description', 'is_static', 'domains', 'git_repository', 'git_branch', 'git_commit_sha', 'docker_image_name', 'docker_image_tag', 'docker_registry_id', 'build_pack', 'static_image', 'install_command', 'build_command', 'start_command', 'ports_exposes', 'ports_mappings', 'base_directory', 'publish_directory', 'health_check_enabled', 'health_check_path', 'health_check_port', 'health_check_host', 'health_check_method', 'health_check_return_code', 'health_check_scheme', 'health_check_response_text', 'health_check_interval', 'health_check_timeout', 'health_check_retries', 'health_check_start_period', 'limits_memory', 'limits_memory_swap', 'limits_memory_swappiness', 'limits_memory_reservation', 'limits_cpus', 'limits_cpuset', 'limits_cpu_shares', 'custom_labels', 'custom_docker_run_options', 'post_deployment_command', 'post_deployment_command_container', 'pre_deployment_command', 'pre_deployment_command_container', 'watch_paths', 'manual_webhook_secret_github', 'manual_webhook_secret_gitlab', 'manual_webhook_secret_bitbucket', 'manual_webhook_secret_gitea', 'docker_compose_location', 'docker_compose_raw', 'docker_compose_custom_start_command', 'docker_compose_custom_build_command', 'docker_compose_domains', 'redirect', 'instant_deploy', 'use_build_server', 'custom_nginx_configuration', 'is_http_basic_auth_enabled', 'http_basic_auth_username', 'http_basic_auth_password', 'connect_to_docker_network', 'force_domain_override'];
 
         $validationRules = [
             'name' => 'string|max:255',
